@@ -17,8 +17,8 @@ class hostname (
 ) {
 
   exec { 'set computername':
-    command => "/usr/sbin/scutil --set ComputerName ${hostname}",
-    unless  => "test `scutil --get ComputerName` == '${hostname}'"
+    command => "/usr/sbin/scutil --set ComputerName $::fact['system_profiler']['serial_number']",
+    unless  => "test `scutil --get ComputerName` == $::fact['system_profiler']['serial_number']"
   }
 
   exec { 'set hostname':
