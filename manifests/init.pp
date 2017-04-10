@@ -22,13 +22,13 @@ class hostname (
   }
 
   exec { 'set hostname':
-    command => "/usr/sbin/scutil --set HostName ${hostname}",
-    unless  => "test `scutil --get HostName` == '${hostname}'"
+    command => "/usr/sbin/scutil --set HostName $::fact['system_profiler']['serial_number']",
+    unless  => "test `scutil --get HostName` == $::fact['system_profiler']['serial_number']"
   }
 
   exec { 'set localhostname':
-    command => "/usr/sbin/scutil --set LocalHostName ${hostname}",
-    unless  => "test `scutil --get LocalHostName` == '${hostname}'"
+    command => "/usr/sbin/scutil --set LocalHostName $::fact['system_profiler']['serial_number']",
+    unless  => "test `scutil --get LocalHostName` == $::fact['system_profiler']['serial_number']"
   }
 
 }
